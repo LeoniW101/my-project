@@ -26,7 +26,6 @@ jobs:
             port: ${{secrets.SSH_PORT}}
             script: |
                   cd /root/farm
-                  git init .
                   git pull https://github.com/LeoniW101/my-project.git
                   systemctl restart farm
                   systemctl status farm
