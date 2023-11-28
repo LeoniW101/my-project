@@ -1,0 +1,33 @@
+name: build-and-deploy-on-droplet
+on: push
+  
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      - name: Run tests
+        run: pytest
+  deploy-on-droplet:
+    needs: run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{secrets.SSH_HOST}} 
+            key: ${{secrets.SSH_PRIVATE_KEY}}
+            username: ${{secrets.SSH_USERNAME}}
+            port: ${{secrets.SSH_PORT}}
+            script: |
+                  cd /home/cd_assignment/CD_assignment
+                  git init .
+                  git pull
+                  systemctl restart CD_assignment
+                  systemctl status CD_assignment
+                  echo "Test"
