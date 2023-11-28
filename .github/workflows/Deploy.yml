@@ -23,7 +23,6 @@ jobs:
             host: ${{secrets.SSH_HOST}} 
             key: ${{secrets.SSH_PRIVATE_KEY}}
             username: ${{secrets.SSH_USERNAME}}
-            port: ${{secrets.SSH_PORT}}
             script: |
                   cd /root/farm
                   git init .
