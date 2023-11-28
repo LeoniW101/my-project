@@ -27,7 +27,7 @@ jobs:
             script: |
                   cd /root/farm
                   git init .
-                  git pull
+                  git pull https://github.com/LeoniW101/my-project.git
                   systemctl restart farm
                   systemctl status farm
                   echo "Test"
