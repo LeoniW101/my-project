@@ -25,9 +25,9 @@ jobs:
             username: ${{secrets.SSH_USERNAME}}
             port: ${{secrets.SSH_PORT}}
             script: |
-                  cd /home/cd_assignment/CD_assignment
+                  cd /root/farm
                   git init .
                   git pull
-                  systemctl restart CD_assignment
-                  systemctl status CD_assignment
+                  systemctl restart farm
+                  systemctl status farm
                   echo "Test"
